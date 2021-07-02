@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.15)
 
 # set the project name and version
-project(Tutorial VERSION 0.0.1)
+project(Tutorial VERSION 0.0.1 LANGUAGES C)
 string(TOLOWER "${PROJECT_NAME}" PROJECT_LOWER_NAME)
 
 set(CMAKE_DEBUG_POSTFIX d)
 
 add_library("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE)
-target_compile_features("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE cxx_std_11)
+target_compile_features("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE c_std_90)
 
 # add compiler warning flags just when building this project via
 # the BUILD_INTERFACE genex
@@ -42,7 +42,7 @@ add_subdirectory("${LIBRARY_NAME_0}")
 
 
 # add the executable
-add_executable("${PROJECT_NAME}" tutorial.cxx)
+add_executable("${PROJECT_NAME}" tutorial.c)
 set_target_properties("${PROJECT_NAME}" PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 target_link_libraries("${PROJECT_NAME}" PUBLIC "versions")
@@ -60,6 +60,13 @@ target_link_libraries(
         "${PROJECT_NAME}"
         PUBLIC
         "${_libs}"
+)
+
+set_target_properties(
+        "${PROJECT_NAME}"
+        PROPERTIES
+        LINKER_LANGUAGE
+        C
 )
 
 # add the binary tree to the search path for include files

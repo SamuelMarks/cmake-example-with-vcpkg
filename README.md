@@ -13,7 +13,7 @@ It's very popular, and has strong CMake integration. Henceforth, it is chosen fo
 
 [Install vcpkg](https://vcpkg.io/en/getting-started.html), configure it with your system. Then run:
 
-    [root]/vcpkg/vcpkg install <dependencies>
+    [root]/vcpkg/vcpkg install zlib openssl
 
 ## Build
 
@@ -25,7 +25,7 @@ It's very popular, and has strong CMake integration. Henceforth, it is chosen fo
 
 ---
 
-This project originally was based upon the official `cmake\Help\guide\tutorial\Complete` at 5333ee1.
+This project originally was based upon the official `cmake\Help\guide\tutorial\Complete` at [`0fdfd6bf`](https://gitlab.kitware.com/cmake/cmake/-/tree/0fdfd6bf/Help/guide/tutorial/Complete).
 
 ---
 

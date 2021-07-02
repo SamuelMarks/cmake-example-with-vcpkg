@@ -1,6 +1,6 @@
+#ifndef PP_MYSQRT_H
+#define PP_MYSQRT_H
 
-namespace mathfunctions {
-namespace detail {
-double mysqrt(double x);
-}
-}
+double mysqrt(double);
+
+#endif /* PP_MYSQRT_H */

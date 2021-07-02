@@ -3,7 +3,7 @@ string(REPLACE " " "_" LIBRARY_NAME "${LIBRARY_NAME}")
 string(TOUPPER "${LIBRARY_NAME}" LIBRARY_UPPER_NAME)
 
 # add the library that runs
-add_library("${LIBRARY_NAME}" versions.cxx)
+add_library("${LIBRARY_NAME}" versions.c)
 
 set(_libs "")
 
@@ -35,7 +35,7 @@ if(USE_MYMATH)
   target_compile_definitions("${LIBRARY_NAME}" PRIVATE "USE_MYMATH")
 
   # first we add the executable that generates the table
-  add_executable(MakeTable MakeTable.cxx)
+  add_executable(MakeTable MakeTable.c)
   target_link_libraries(MakeTable PRIVATE tutorial_compiler_flags)
 
   # add the command to generate the source code
@@ -46,23 +46,31 @@ if(USE_MYMATH)
     )
 
   # library that just does sqrt
-  add_library(SqrtLibrary STATIC
-              mysqrt.cxx
+  set(DEPENDANT_LIBRARY "SqrtLibrary")
+  add_library("${DEPENDANT_LIBRARY}" STATIC
+          mysqrt.c
               ${CMAKE_CURRENT_BINARY_DIR}/Table.h
               )
 
+  set_target_properties(
+          "${DEPENDANT_LIBRARY}"
+          PROPERTIES
+          LINKER_LANGUAGE
+          C
+  )
+
   # state that we depend on our binary dir to find Table.h
-  target_include_directories(SqrtLibrary PRIVATE
+  target_include_directories("${DEPENDANT_LIBRARY}" PRIVATE
                              ${CMAKE_CURRENT_BINARY_DIR}
                              )
 
   # state that SqrtLibrary need PIC when the default is shared libraries
-  set_target_properties(SqrtLibrary PROPERTIES
+  set_target_properties("${DEPENDANT_LIBRARY}" PROPERTIES
                         POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS}
                         )
 
-  target_link_libraries(SqrtLibrary PUBLIC tutorial_compiler_flags)
-  target_link_libraries("${LIBRARY_NAME}" PRIVATE SqrtLibrary)
+  target_link_libraries("${DEPENDANT_LIBRARY}" PUBLIC tutorial_compiler_flags)
+  target_link_libraries("${LIBRARY_NAME}" PRIVATE "${DEPENDANT_LIBRARY}")
 endif()
 
 target_link_libraries("${LIBRARY_NAME}" PUBLIC tutorial_compiler_flags)
@@ -70,6 +78,12 @@ target_link_libraries("${LIBRARY_NAME}" PUBLIC tutorial_compiler_flags)
 # define the symbol stating we are using the declspec(dllexport) when
 # building on windows
 target_compile_definitions("${LIBRARY_NAME}" PRIVATE "EXPORTING_MYMATH")
+set_target_properties(
+        "${LIBRARY_NAME}"
+        PROPERTIES
+        LINKER_LANGUAGE
+        C
+)
 
 # setup the version numbering
 set_property(TARGET "${LIBRARY_NAME}" PROPERTY VERSION "1.0.0")

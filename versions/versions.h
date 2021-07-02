@@ -11,8 +11,13 @@
 #  define DECLSPEC
 #endif
 
-#include <zlib.h>
+#include <stddef.h>
+/*#include <zlib.h>
 #include <openssl/crypto.h>
+ */
+#define ZLIB_VERSION "0.0.0"
+#define OPENSSL_VERSION_TEXT "0.0.0"
+typedef unsigned long uLong;
 
 #define WIDEN2(x) L ## x
 #define WIDEN(x) WIDEN2(x)
@@ -21,8 +26,6 @@ static const wchar_t *VERSIONS[][2] = {
         {L"ZLIB_VERSION", WIDEN(ZLIB_VERSION)},
         {L"OPENSSL_VERSION_TEXT", WIDEN(OPENSSL_VERSION_TEXT)}
 };
-
-static const size_t VERSIONS_N = sizeof VERSIONS/sizeof VERSIONS[0];
 
 uLong get_hash();
 
