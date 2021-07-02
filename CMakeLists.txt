@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.15)
 project(Tutorial VERSION 0.0.1 LANGUAGES C)
 string(TOLOWER "${PROJECT_NAME}" PROJECT_LOWER_NAME)
 
+set(CMAKE_C_STANDARD 90)
 set(CMAKE_DEBUG_POSTFIX d)
 
 add_library("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE)

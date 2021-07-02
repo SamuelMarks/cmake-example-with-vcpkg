@@ -23,7 +23,7 @@ typedef unsigned long uLong;
 #define WIDEN(x) WIDEN2(x)
 
 static const wchar_t *VERSIONS[][2] = {
-        {L"ZLIB_VERSION", WIDEN(ZLIB_VERSION)},
+        {L"ZLIB_VERSION",         WIDEN(ZLIB_VERSION)},
         {L"OPENSSL_VERSION_TEXT", WIDEN(OPENSSL_VERSION_TEXT)}
 };
 
