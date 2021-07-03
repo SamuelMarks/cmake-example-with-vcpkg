@@ -16,8 +16,11 @@ jobs:
       - name: Build
         run: |
           mkdir build && cd $_
-          cmake .. \
-                -DCMAKE_BUILD_TYPE="Debug" \
-                -DCMAKE_TOOLCHAIN_FILE="/tmp/vcpkg/scripts/buildsystems/vcpkg.cmake"
-          cmake . --build
+          cmake -DCMAKE_BUILD_TYPE="Debug" \
+                -DCMAKE_TOOLCHAIN_FILE="/tmp/vcpkg/scripts/buildsystems/vcpkg.cmake" \
+                ..
+          cmake --version
+          which cmake
+          cmake --build \
+                .
         shell: bash
