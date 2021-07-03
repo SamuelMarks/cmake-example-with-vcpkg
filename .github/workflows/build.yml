@@ -10,7 +10,7 @@ jobs:
         run: |
           git clone --depth=1 https://github.com/microsoft/vcpkg /tmp/vcpkg
           cd $_
-          ./bootstrap-vcpkg.sh --disable-metrics
+          VCPKG_DISABLE_METRICS=1 ./bootstrap-vcpkg.sh
           ./vcpkg install openssl zlib
         shell: bash
       - name: Build
