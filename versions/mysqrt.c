@@ -6,9 +6,8 @@
 
 // a hack square root calculation using simple operations
 double mysqrt(double x) {
-    if (x <= 0) {
-        return 0;
-    }
+    if (x <= 0) return 0;
+    unsigned short i;
 
     // use the table to help find an initial value
     double result = x;
@@ -18,11 +17,12 @@ double mysqrt(double x) {
     }
 
     // do ten iterations
-    for (unsigned short i = 0; i < 10; ++i) {
+    for (i = 0; i < 10; ++i) {
+        double delta;
         if (result <= 0) {
             result = 0.1;
         }
-        double delta = x - (result * result);
+        delta = x - (result * result);
         result = result + 0.5 * delta / result;
         printf("Computing sqrt of %f to be %f\n", x, result);
     }

@@ -13,8 +13,9 @@ int main(int argc, char *argv[]) {
         printf("Usage: %s number\n", argv[0]);
         return EXIT_FAILURE;
     }
+    unsigned short i;
 
-    for (unsigned i = 0; i < sizeof VERSIONS / sizeof VERSIONS[0]; i++)
+    for (i = 0; i < sizeof VERSIONS / sizeof VERSIONS[0]; i++)
         wprintf(L"%ls\t%ls", VERSIONS[i][0], VERSIONS[i][1]);
 
     return EXIT_SUCCESS;

@@ -15,8 +15,8 @@ target_compile_features("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE c_std_9
 set(gcc_like_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU>")
 set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
 target_compile_options("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE
-  "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
-  "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
+  "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused;-fsanitize=address>>"
+  "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3;-WX;-Za;-fsanitize=address>>"
 )
 
 # control where the static and shared libraries are built so that on windows
@@ -46,7 +46,7 @@ add_subdirectory("${LIBRARY_NAME_0}")
 add_executable("${PROJECT_NAME}" tutorial.c)
 set_target_properties("${PROJECT_NAME}" PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-target_link_libraries("${PROJECT_NAME}" PUBLIC "versions")
+target_link_libraries("${PROJECT_NAME}" PUBLIC "${LIBRARY_NAME_0}")
 
 set(_libs "")
 

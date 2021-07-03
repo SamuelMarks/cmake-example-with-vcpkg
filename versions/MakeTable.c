@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 int main(int argc, char *argv[]) {
     // make sure we have enough arguments
@@ -13,13 +14,14 @@ int main(int argc, char *argv[]) {
 #else
     fout = fopen(argv[1], "w");
 #endif
-    if ((int) fout != EOF) {
-        fprintf(fout, "double sqrtTable[] = {\n");
-        for (unsigned short i = 0; i < 10; ++i)
-            fprintf(fout, "%f,\n", sqrt(i));
+    if (fout == NULL) return ENOENT; /* or actually grab the error using OS-specific approach */
 
-        // close the table with a zero
-        fputs("0};\n", fout);
-        return fclose(fout) == EOF ? EXIT_FAILURE : EXIT_SUCCESS;
-    }
+    unsigned short i;
+    fprintf(fout, "double sqrtTable[] = {\n");
+    for (i = 0; i < 10; ++i)
+        fprintf(fout, "%f,\n", sqrt(i));
+
+    // close the table with a zero
+    fputs("0};\n", fout);
+    return fclose(fout) == EOF ? EXIT_FAILURE : EXIT_SUCCESS;
 }

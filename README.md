@@ -1,6 +1,8 @@
 CMake project for vcpkg integration
 ===================================
+[![build](https://github.com/SamuelMarks/cmake-example-with-vcpkg/actions/workflows/build.yml/badge.svg)](https://github.com/SamuelMarks/cmake-example-with-vcpkg/actions/workflows/build.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![C89](https://img.shields.io/badge/C-89-blue)](https://en.wikipedia.org/wiki/C89_(C_version))
 
 CMake has become the default 'standard' for cross-platform builds; popularly for C and C++.
 
