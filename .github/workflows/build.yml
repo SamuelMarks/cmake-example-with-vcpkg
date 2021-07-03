@@ -10,8 +10,8 @@ jobs:
         run: |
           git clone --depth=1 https://github.com/microsoft/vcpkg /tmp/vcpkg
           cd $_
-          ./bootstrap-vcpkg.sh
-          ./vcpkg install openssl:linux-x64 zlib:linux-x64
+          ./bootstrap-vcpkg.sh --disable-metrics
+          ./vcpkg install openssl zlib
         shell: bash
       - name: Build
         run: |
