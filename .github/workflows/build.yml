@@ -1,0 +1,24 @@
+name: build
+on: [push, pull_request]
+
+jobs:
+  ubuntu_native_hosted:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Restore from cache and install vcpkg
+        uses: lukka/run-vcpkg@v7
+        with:
+          setupOnly: true
+      - name: Dependencies
+        run: |
+          $VCPKG_ROOT/vcpkg install openssl:linux-x64 zlib:linux-x64
+        shell: bash
+      - name: Build
+        run: |
+          mkdir build && cd $_
+          cmake .. \
+                -DCMAKE_BUILD_TYPE="Debug" \
+                -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/vcpkg/scripts/buildsystems/vcpkg.cmake"
+          cmake . --build
+        shell: bash
