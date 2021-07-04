@@ -1,6 +1,7 @@
 // A simple program that computes the square root of a number
 #include <stdio.h>
 #include <stdlib.h>
+#include <wchar.h>
 
 #include "versions.h"
 #include "TutorialConfig.h"
@@ -13,7 +14,7 @@ int main(int argc, char *argv[]) {
         printf("Usage: %s number\n", argv[0]);
         return EXIT_FAILURE;
     }
-    unsigned short i;
+    size_t i;
 
     for (i = 0; i < sizeof VERSIONS / sizeof VERSIONS[0]; i++)
         wprintf(L"%ls\t%ls", VERSIONS[i][0], VERSIONS[i][1]);
