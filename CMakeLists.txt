@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.0)
 
 # set the project name and version
 project(Tutorial VERSION 0.0.1 LANGUAGES C)
@@ -12,11 +12,11 @@ target_compile_features("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE c_std_9
 
 # add compiler warning flags just when building this project via
 # the BUILD_INTERFACE genex
-set(gcc_like_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU>")
-set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
+set(gcc_like "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU>")
+set(msvc "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
 target_compile_options("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE
-  "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused;-fsanitize=address>>"
-  "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3;-WX;-Za;-fsanitize=address>>"
+  "$<${gcc_like}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused;-fsanitize=address>>"
+  "$<${msvc}:$<BUILD_INTERFACE:-W3;-WX;-Za;-fsanitize=address>>"
 )
 
 # control where the static and shared libraries are built so that on windows
@@ -39,8 +39,6 @@ configure_file("${PROJECT_NAME}Config.h.in" "${PROJECT_NAME}Config.h")
 # add the library
 set(LIBRARY_NAME_0 "versions")
 add_subdirectory("${LIBRARY_NAME_0}")
-
-
 
 # add the executable
 add_executable("${PROJECT_NAME}" tutorial.c)
@@ -81,35 +79,6 @@ install(TARGETS "${PROJECT_NAME}" DESTINATION bin)
 install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.h"
   DESTINATION include
   )
-
-# enable testing
-enable_testing()
-
-# does the application run
-add_test(NAME Runs COMMAND "${PROJECT_NAME}" 25)
-
-# does the usage message work?
-add_test(NAME Usage COMMAND "${PROJECT_NAME}")
-set_tests_properties(Usage
-  PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number"
-  )
-
-# define a function to simplify adding tests
-function(do_test target arg result)
-  add_test(NAME Comp${arg} COMMAND ${target} ${arg})
-  set_tests_properties(Comp${arg}
-    PROPERTIES PASS_REGULAR_EXPRESSION ${result}
-    )
-endfunction(do_test)
-
-# do a bunch of result based tests
-do_test("${PROJECT_NAME}" 4 "4 is 2")
-do_test("${PROJECT_NAME}" 9 "9 is 3")
-do_test("${PROJECT_NAME}" 5 "5 is 2.236")
-do_test("${PROJECT_NAME}" 7 "7 is 2.645")
-do_test("${PROJECT_NAME}" 25 "25 is 5")
-do_test("${PROJECT_NAME}" -25 "-25 is [-nan|nan|0]")
-do_test("${PROJECT_NAME}" 0.0001 "0.0001 is 0.01")
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")

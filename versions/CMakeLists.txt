@@ -28,57 +28,8 @@ target_include_directories("${LIBRARY_NAME}"
                             "$<INSTALL_INTERFACE:include>"
                            )
 
-# should we use our own math functions
-option(USE_MYMATH "Use tutorial provided math implementation" ON)
-if(USE_MYMATH)
-
-  target_compile_definitions("${LIBRARY_NAME}" PRIVATE "USE_MYMATH")
-
-  # first we add the executable that generates the table
-  add_executable(MakeTable MakeTable.c)
-  target_link_libraries(MakeTable PRIVATE "${PROJECT_LOWER_NAME}_compiler_flags")
-
-  # add the command to generate the source code
-  add_custom_command(
-    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/Table.h"
-    COMMAND MakeTable "${CMAKE_CURRENT_BINARY_DIR}/Table.h"
-    DEPENDS MakeTable
-  )
-
-  # library that just does sqrt
-  set(DEPENDANT_LIBRARY "SqrtLibrary")
-  add_library(
-          "${DEPENDANT_LIBRARY}" STATIC
-          mysqrt.c
-          "${CMAKE_CURRENT_BINARY_DIR}/Table.h"
-  )
-
-  set_target_properties(
-          "${DEPENDANT_LIBRARY}"
-          PROPERTIES
-          LINKER_LANGUAGE
-          C
-  )
-
-  # state that we depend on our binary dir to find Table.h
-  target_include_directories("${DEPENDANT_LIBRARY}" PRIVATE
-                             "${CMAKE_CURRENT_BINARY_DIR}"
-                             )
-
-  # state that SqrtLibrary need PIC when the default is shared libraries
-  set_target_properties("${DEPENDANT_LIBRARY}" PROPERTIES
-                        POSITION_INDEPENDENT_CODE "${BUILD_SHARED_LIBS}"
-                        )
-
-  target_link_libraries("${DEPENDANT_LIBRARY}" PUBLIC "${PROJECT_LOWER_NAME}_compiler_flags")
-  target_link_libraries("${LIBRARY_NAME}" PRIVATE "${DEPENDANT_LIBRARY}")
-endif()
-
 target_link_libraries("${LIBRARY_NAME}" PUBLIC "${PROJECT_LOWER_NAME}_compiler_flags")
 
-# define the symbol stating we are using the declspec(dllexport) when
-# building on windows
-target_compile_definitions("${LIBRARY_NAME}" PRIVATE "EXPORTING_MYMATH")
 set_target_properties(
         "${LIBRARY_NAME}"
         PROPERTIES

@@ -8,11 +8,15 @@
 #endif
 
 #include <stddef.h>
-/*#include <zlib.h>
+#include <zlib.h>
 #include <openssl/crypto.h>
- */
+
+#ifndef ZLIB_VERSION
 #define ZLIB_VERSION "0.0.0"
+#endif
+#ifndef OPENSSL_VERSION_TEXT
 #define OPENSSL_VERSION_TEXT "0.0.0"
+#endif
 typedef unsigned long uLong;
 
 #define WIDEN2(x) L ## x
