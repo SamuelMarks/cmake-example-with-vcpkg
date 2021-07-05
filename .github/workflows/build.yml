@@ -2,7 +2,7 @@
 # Copyright (c) 2019-2020-2021 Luca Cappa
 # SPDX short identifier: MIT
 name: build
-on: [push]
+on: [push, pull_request]
 
 jobs:
   job:
