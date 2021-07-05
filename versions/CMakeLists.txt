@@ -22,11 +22,12 @@ target_link_libraries(
 
 # state that anybody linking to us needs to include the current source dir
 # to find MathFunctions.h, while we don't.
-target_include_directories("${LIBRARY_NAME}"
-                           INTERFACE
-                            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
-                            "$<INSTALL_INTERFACE:include>"
-                           )
+target_include_directories(
+        "${LIBRARY_NAME}"
+        INTERFACE
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        "$<INSTALL_INTERFACE:include>"
+)
 
 target_link_libraries("${LIBRARY_NAME}" PUBLIC "${PROJECT_LOWER_NAME}_compiler_flags")
 

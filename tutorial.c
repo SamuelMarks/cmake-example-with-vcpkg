@@ -17,7 +17,9 @@ int main(int argc, char *argv[]) {
     size_t i;
 
     for (i = 0; i < sizeof VERSIONS / sizeof VERSIONS[0]; i++)
-        wprintf(L"%ls\t%ls", VERSIONS[i][0], VERSIONS[i][1]);
+        wprintf(L"%ls\t%ls\n", VERSIONS[i][0], VERSIONS[i][1]);
+
+    printf("\nget_hash(): %lu\n", get_hash());
 
     return EXIT_SUCCESS;
 }
