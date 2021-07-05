@@ -7,6 +7,7 @@
 #include "TutorialConfig.h"
 
 int main(int argc, char *argv[]) {
+    size_t i;
     if (argc < 2) {
         /* report version */
         fprintf(stderr, "%s Version %d.%d\n", argv[0],
@@ -14,7 +15,6 @@ int main(int argc, char *argv[]) {
         printf("Usage: %s number\n", argv[0]);
         return EXIT_FAILURE;
     }
-    size_t i;
 
     for (i = 0; i < sizeof VERSIONS / sizeof VERSIONS[0]; i++)
         wprintf(L"%ls\t%ls\n", VERSIONS[i][0], VERSIONS[i][1]);

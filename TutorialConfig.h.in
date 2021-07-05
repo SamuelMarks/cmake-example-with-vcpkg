@@ -1,3 +1,8 @@
+#ifndef PP_TUTORIAL_CONFIG_H
+#define PP_TUTORIAL_CONFIG_H
+
 /* the configured options and settings for Tutorial */
 #define Tutorial_VERSION_MAJOR @Tutorial_VERSION_MAJOR@
 #define Tutorial_VERSION_MINOR @Tutorial_VERSION_MINOR@
+
+#endif /* PP_TUTORIAL_CONFIG_H */
