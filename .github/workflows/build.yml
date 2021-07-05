@@ -5,7 +5,7 @@ on: [push]
 
 jobs:
   job:
-    name: ${{ matrix.os }}-hosted-basic
+    name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -15,21 +15,15 @@ jobs:
           - os: windows-latest
             triplet: x64-windows
             vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
-            vcpkgPackages:
-              - zlib
-              - openssl
+            vcpkgPackages: 'zlib openssl'
           - os: ubuntu-latest
             triplet: x64-linux
             vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
-            vcpkgPackages:
-              - zlib
-              - openssl
+            vcpkgPackages: 'zlib openssl'
           - os: macos-latest
             triplet: x64-osx
             vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
-            vcpkgPackages:
-              - zlib
-              - openssl
+            vcpkgPackages: 'zlib openssl'
 
     steps:
       - uses: actions/checkout@v1
