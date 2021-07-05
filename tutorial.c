@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <wchar.h>
 
-#include "versions.h"
+#include <versions.h>
 #include "TutorialConfig.h"
 
 int main(int argc, char *argv[]) {
