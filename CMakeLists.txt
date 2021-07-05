@@ -20,7 +20,7 @@ set(msvc "$<COMPILE_LANG_AND_ID:C,CXX,MSVC>")
 target_compile_options(
         "${PROJECT_LOWER_NAME}_compiler_flags"
         INTERFACE
-        "$<${gcc_like}:$<BUILD_INTERFACE:-Werror;-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused;-fsanitize=address>>"
+        "$<${gcc_like}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused;-fsanitize=address>>"
         "$<${msvc}:$<BUILD_INTERFACE:-W3;-WX;-Zi;-fsanitize=address;-permissive->>"
 )
 if (NOT MSVC)
