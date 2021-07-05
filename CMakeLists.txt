@@ -17,10 +17,11 @@ target_compile_features("${PROJECT_LOWER_NAME}_compiler_flags" INTERFACE "c_std_
 # the BUILD_INTERFACE genex
 set(gcc_like "$<COMPILE_LANG_AND_ID:C,CXX,ARMClang,AppleClang,Clang,GNU>")
 set(msvc "$<COMPILE_LANG_AND_ID:C,CXX,MSVC>")
+# -g -fsanitize=address -fno-omit-frame-pointer
 target_compile_options(
         "${PROJECT_LOWER_NAME}_compiler_flags"
         INTERFACE
-        "$<${gcc_like}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused;-fsanitize=address>>"
+        "$<${gcc_like}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
         "$<${msvc}:$<BUILD_INTERFACE:-W3;-WX;-Zi;-fsanitize=address;-permissive->>"
 )
 if (NOT MSVC)
