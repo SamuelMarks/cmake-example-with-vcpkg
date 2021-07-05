@@ -3,7 +3,7 @@
 
 #if defined(_WIN32)
 #    define DECLSPEC __declspec(dllimport)
-#else // non windows
+#else /* non windows */
 #  define DECLSPEC
 #endif
 
