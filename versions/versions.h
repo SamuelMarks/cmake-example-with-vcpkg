@@ -1,11 +1,13 @@
 #ifndef PP_VERSIONS_H
 #define PP_VERSIONS_H
 
-#if defined(_WIN32)
-#    define DECLSPEC __declspec(dllimport)
-#else /* non windows */
+/*
+#if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
+#    define DECLSPEC __declspec(dllexport)
+#else
 #  define DECLSPEC
 #endif
+*/
 
 #include <stddef.h>
 #include <zlib.h>

@@ -1,25 +1,39 @@
-/* A simple program that computes the square root of a number */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <wchar.h>
 
 #include <versions.h>
 #include "TutorialConfig.h"
 
+#if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
+/* https://docs.microsoft.com/en-us/cpp/c-runtime-library/path-field-limits */
+#define MAX_FNAME _MAX_FNAME
+#else
+#define PATH_SEP "/"
+#define MAX_FNAME PATH_MAX
+#endif
+
 int main(int argc, char *argv[]) {
-    size_t i;
-    if (argc < 2) {
-        /* report version */
-        fprintf(stderr, "%s Version %d.%d\n", argv[0],
-                Tutorial_VERSION_MAJOR, Tutorial_VERSION_MINOR);
-        printf("Usage: %s number\n", argv[0]);
-        return EXIT_FAILURE;
+    {
+        char basename[MAX_FNAME] = {0};
+        {
+            char *token = strtok(argv[0], PATH_SEP);
+            for (; token; token = strtok(NULL, PATH_SEP))
+                strcpy(basename, token);
+        }
+
+        printf("%s version: %4d.%d\n"
+               "\nget_hash(): %20lu\n", basename,
+               Tutorial_VERSION_MAJOR, Tutorial_VERSION_MINOR,
+               get_hash());
     }
 
-    for (i = 0; i < sizeof VERSIONS / sizeof VERSIONS[0]; i++)
-        wprintf(L"%ls\t%ls\n", VERSIONS[i][0], VERSIONS[i][1]);
-
-    printf("\nget_hash(): %lu\n", get_hash());
+    {
+        size_t i;
+        for (i = 0; i < sizeof VERSIONS / sizeof VERSIONS[0]; i++)
+            wprintf(L"%ls: %14ls\n", VERSIONS[i][0], VERSIONS[i][1]);
+    }
 
     return EXIT_SUCCESS;
 }
