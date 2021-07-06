@@ -2,6 +2,8 @@ get_filename_component(LIBRARY_NAME "${CMAKE_CURRENT_SOURCE_DIR}" NAME)
 string(REPLACE " " "_" LIBRARY_NAME "${LIBRARY_NAME}")
 string(TOUPPER "${LIBRARY_NAME}" LIBRARY_UPPER_NAME)
 
+message(STATUS "LIBRARY_NAME in versions/CMakeLists.txt is: ${LIBRARY_NAME}")
+
 # add the library that runs
 add_library("${LIBRARY_NAME}" versions.c)
 

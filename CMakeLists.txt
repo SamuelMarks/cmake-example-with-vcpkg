@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.0)
 project(Tutorial VERSION 0.0.1 LANGUAGES C)
 string(TOLOWER "${PROJECT_NAME}" PROJECT_LOWER_NAME)
 
+message(STATUS "PROJECT_NAME in CMakeLists.txt is: ${PROJECT_NAME}")
+
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 if (NOT MSVC)
