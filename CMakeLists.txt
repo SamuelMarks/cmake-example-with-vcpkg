@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 
 # set the project name and version
-project(Tutorial VERSION 0.0.1 LANGUAGES C)
+project(CmakeExampleWithVcpkg VERSION 0.0.1 LANGUAGES C)
 string(TOLOWER "${PROJECT_NAME}" PROJECT_LOWER_NAME)
 
 set(CMAKE_C_STANDARD 90)
@@ -59,7 +59,7 @@ set(LIBRARY_NAME_0 "versions")
 add_subdirectory("${LIBRARY_NAME_0}")
 
 # add the executable
-add_executable("${PROJECT_NAME}" "tutorial.c")
+add_executable("${PROJECT_NAME}" "main_cmake_example_with_vcpkg.c")
 if (NOT MSVC)
   set_target_properties("${PROJECT_NAME}" PROPERTIES DEBUG_POSTFIX "${CMAKE_DEBUG_POSTFIX}")
 endif ()
@@ -122,14 +122,7 @@ install(
 )
 
 include(CMakePackageConfigHelpers)
-# generate the config file that is includes the exports
-configure_package_config_file(
-        "${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in"
-        "${CMAKE_CURRENT_BINARY_DIR}/${LIBRARY_NAME_0}Config.cmake"
-        INSTALL_DESTINATION "lib/cmake/example"
-        NO_SET_AND_CHECK_MACRO
-        NO_CHECK_REQUIRED_COMPONENTS_MACRO
-)
+
 # generate the version file for the config file
 write_basic_package_version_file(
         "${CMAKE_CURRENT_BINARY_DIR}/${LIBRARY_NAME_0}ConfigVersion.cmake"

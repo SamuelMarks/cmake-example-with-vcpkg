@@ -4,7 +4,7 @@
 #include <wchar.h>
 
 #include <versions.h>
-#include "TutorialConfig.h"
+#include "CmakeExampleWithVcpkgConfig.h"
 
 #if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
 
@@ -35,7 +35,9 @@ int main(int argc, char *argv[]) {
 
         printf("%s version: %4d.%d.%d\n"
                "\nget_hash(): %20lu\n", basename,
-               Tutorial_VERSION_MAJOR, Tutorial_VERSION_MINOR, Tutorial_VERSION_PATCH,
+               CMAKE_EXAMPLE_WITH_VCPKG_VERSION_MAJOR,
+               CMAKE_EXAMPLE_WITH_VCPKG_VERSION_MINOR,
+               CMAKE_EXAMPLE_WITH_VCPKG_VERSION_PATCH,
                get_hash());
     }
 

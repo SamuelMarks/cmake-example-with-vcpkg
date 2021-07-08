@@ -1,0 +1,9 @@
+#ifndef PP_CMAKE_EXAMPLE_WITH_VCPKG_CONFIG_H
+#define PP_CMAKE_EXAMPLE_WITH_VCPKG_CONFIG_H
+
+/* the configured options and settings for CmakeExampleWithVcpkg */
+#define CMAKE_EXAMPLE_WITH_VCPKG_VERSION_MAJOR @CmakeExampleWithVcpkg_VERSION_MAJOR@
+#define CMAKE_EXAMPLE_WITH_VCPKG_VERSION_MINOR @CmakeExampleWithVcpkg_VERSION_MINOR@
+#define CMAKE_EXAMPLE_WITH_VCPKG_VERSION_PATCH @CmakeExampleWithVcpkg_VERSION_PATCH@
+
+#endif /* PP_CMAKE_EXAMPLE_WITH_VCPKG_CONFIG_H */
