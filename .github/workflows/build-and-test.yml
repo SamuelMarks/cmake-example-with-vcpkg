@@ -1,7 +1,7 @@
 # Originally from https://github.com/lukka/CppBuildTasks-Validation/blob/116611c/.github/workflows/hosted-basic.yml
 # Copyright (c) 2019-2020-2021 Luca Cappa
 # SPDX short identifier: MIT
-name: build
+name: build and test
 on: [push, pull_request]
 
 jobs:
@@ -83,4 +83,4 @@ jobs:
           buildDirectory: '${{ runner.workspace }}/b/ninja-bash/'
           useShell: bash
       - name: test
-        run: ctest .
+        run: ctest --test-dir $RUNNER_WORKSPACE

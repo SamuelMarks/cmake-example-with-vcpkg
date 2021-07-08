@@ -90,10 +90,11 @@ if (BUILD_TESTING)
     add_test(NAME Runs COMMAND "${PROJECT_NAME}")
 
     # does the usage message work?
-    add_test(NAME Usage COMMAND "${PROJECT_NAME}")
+    add_test(NAME Output COMMAND "${PROJECT_NAME}")
     set_tests_properties(
-            Usage
-            PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number"
+            Output
+            PROPERTIES PASS_REGULAR_EXPRESSION
+                "version:*;get_hash():*;ZLIB_VERSION:*;OPENSSL_VERSION_TEXT:*"
     )
 endif (BUILD_TESTING)
 
