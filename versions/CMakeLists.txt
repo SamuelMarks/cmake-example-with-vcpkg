@@ -2,8 +2,10 @@ get_filename_component(LIBRARY_NAME "${CMAKE_CURRENT_SOURCE_DIR}" NAME)
 string(REPLACE " " "_" LIBRARY_NAME "${LIBRARY_NAME}")
 string(TOUPPER "${LIBRARY_NAME}" LIBRARY_UPPER_NAME)
 
+include(GenerateExportHeader)
+
 # add the library that runs
-add_library("${LIBRARY_NAME}" versions.c)
+add_library("${LIBRARY_NAME}" "versions")
 
 set(_libs "")
 
@@ -20,8 +22,6 @@ target_link_libraries(
         "${_libs}"
 )
 
-# state that anybody linking to us needs to include the current source dir
-# to find MathFunctions.h, while we don't.
 target_include_directories(
         "${LIBRARY_NAME}"
         INTERFACE
@@ -38,6 +38,9 @@ set_target_properties(
         C
 )
 
+set(_export_file "${CMAKE_CURRENT_SOURCE_DIR}/${LIBRARY_NAME}_export.h")
+generate_export_header("${LIBRARY_NAME}" EXPORT_FILE_NAME "${_export_file}")
+
 # setup the version numbering
 set_property(TARGET "${LIBRARY_NAME}" PROPERTY VERSION "1.0.0")
 set_property(TARGET "${LIBRARY_NAME}" PROPERTY SOVERSION "1")
@@ -50,4 +53,4 @@ endif()
 install(TARGETS ${installable_libs}
         DESTINATION "lib"
         EXPORT "${LIBRARY_NAME}Targets")
-install(FILES "versions.h" DESTINATION "include")
+install(FILES "${_export_file}" "versions.h" DESTINATION "include")

@@ -22,7 +22,7 @@
 #endif
 
 int main(int argc, char *argv[]) {
-    {
+    /*{
         char basename[MAX_FNAME] = {0};
         {
 
@@ -35,7 +35,11 @@ int main(int argc, char *argv[]) {
                "\nget_hash(): %20lu\n", basename,
                Tutorial_VERSION_MAJOR, Tutorial_VERSION_MINOR,
                get_hash());
-    }
+    }*/
+    printf("%s version: %4d.%d\n"
+           "\nget_hash(): %20lu\n", "basename",
+           Tutorial_VERSION_MAJOR, Tutorial_VERSION_MINOR,
+           get_hash());
 
     {
         size_t i;

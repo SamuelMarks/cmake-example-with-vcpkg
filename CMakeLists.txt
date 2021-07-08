@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.19)
 
 # set the project name and version
 project(Tutorial VERSION 0.0.1 LANGUAGES C)

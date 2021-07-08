@@ -1,6 +1,8 @@
 #ifndef PP_VERSIONS_H
 #define PP_VERSIONS_H
 
+//#include "versions/versions_export.h"
+
 /*
 #if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
 #    define DECLSPEC __declspec(dllexport)
@@ -12,6 +14,7 @@
 #include <stddef.h>
 #include <zlib.h>
 #include <openssl/crypto.h>
+#include "versions_export.h"
 
 #ifndef ZLIB_VERSION
 #define ZLIB_VERSION "0.0.0"
@@ -28,7 +31,6 @@ static const wchar_t *VERSIONS[][2] = {
         {L"ZLIB_VERSION",         WIDEN(ZLIB_VERSION)},
         {L"OPENSSL_VERSION_TEXT", WIDEN(OPENSSL_VERSION_TEXT)}
 };
-
-uLong get_hash();
+uLong VERSIONS_EXPORT get_hash();
 
 #endif /* PP_VERSIONS_H */
