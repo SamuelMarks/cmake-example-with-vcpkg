@@ -11,8 +11,7 @@
 /* https://docs.microsoft.com/en-us/cpp/c-runtime-library/path-field-limits */
 #define PATH_SEP "\\"
 #define MAX_FNAME _MAX_FNAME
-#define strtok(str,delim) strtok_s(str,delim,NULL)
-#define strcpy(dst,src) strcpy_s(dst,strlen(dst),src)
+#define strtok_r strtok_s
 
 #else
 
@@ -22,24 +21,23 @@
 #endif
 
 int main(int argc, char *argv[]) {
-    /*{
+    {
         char basename[MAX_FNAME] = {0};
         {
-
-            char *token = strtok(argv[0], PATH_SEP);
-            for (; token; token = strtok(NULL, PATH_SEP))
+            char *token, *rest = NULL;
+            for (token = strtok_r(argv[0], PATH_SEP, &rest); token != NULL; token = strtok_r(NULL, PATH_SEP, &rest))
+#if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
+                strcpy_s(basename, MAX_FNAME, token);
+#else
                 strcpy(basename, token);
+#endif
         }
 
-        printf("%s version: %4d.%d\n"
+        printf("%s version: %4d.%d.%d\n"
                "\nget_hash(): %20lu\n", basename,
-               Tutorial_VERSION_MAJOR, Tutorial_VERSION_MINOR,
+               Tutorial_VERSION_MAJOR, Tutorial_VERSION_MINOR, Tutorial_VERSION_PATCH,
                get_hash());
-    }*/
-    printf("%s version: %4d.%d\n"
-           "\nget_hash(): %20lu\n", "basename",
-           Tutorial_VERSION_MAJOR, Tutorial_VERSION_MINOR,
-           get_hash());
+    }
 
     {
         size_t i;

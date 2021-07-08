@@ -22,7 +22,7 @@ target_compile_options(
         "${PROJECT_LOWER_NAME}_compiler_flags"
         INTERFACE
         "$<${gcc_like}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
-        "$<${msvc}:$<BUILD_INTERFACE:-W3;-WX;-Zi;-fsanitize=address;-permissive->>"
+        "$<${msvc}:$<BUILD_INTERFACE:-W3;-WX;-Zi;-permissive->>"
 )
 if (NOT MSVC)
   add_compile_options("$<$<CONFIG:RELEASE>:-O3>")
