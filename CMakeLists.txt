@@ -81,6 +81,22 @@ target_include_directories(
         "${PROJECT_BINARY_DIR}"
 )
 
+# enable testing
+include(CTest)
+if (BUILD_TESTING)
+    enable_testing()
+
+    # does the application run
+    add_test(NAME Runs COMMAND "${PROJECT_NAME}")
+
+    # does the usage message work?
+    add_test(NAME Usage COMMAND "${PROJECT_NAME}")
+    set_tests_properties(
+            Usage
+            PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number"
+    )
+endif (BUILD_TESTING)
+
 # add the install targets
 install(
         TARGETS "${PROJECT_NAME}"

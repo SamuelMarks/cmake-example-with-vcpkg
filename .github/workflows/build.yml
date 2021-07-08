@@ -82,3 +82,5 @@ jobs:
           vcpkgTriplet: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}
           buildDirectory: '${{ runner.workspace }}/b/ninja-bash/'
           useShell: bash
+      - name: test
+        run: ctest .
