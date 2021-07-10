@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 
     {
         size_t i;
-        for (i = 0; i < sizeof VERSIONS / sizeof VERSIONS[0]; i++)
+        for (i = 0; i < VERSIONS_N; i++)
             wprintf(L"%ls: %14ls\n", VERSIONS[i][0], VERSIONS[i][1]);
     }
 

@@ -2,7 +2,7 @@
 #include "versions.h"
 
 RX_TEST_CASE(versions, size) {
-    RX_UINT_REQUIRE_EQUAL(sizeof VERSIONS / sizeof VERSIONS[0], 2);
+    RX_UINT_REQUIRE_EQUAL(VERSIONS_N, 2);
 }
 
 int main(int argc, const char **argv) {
