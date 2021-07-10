@@ -6,8 +6,8 @@
 #include <openssl/crypto.h>
 #include "versions_export.h"
 
-extern const wchar_t VERSIONS_EXPORT *VERSIONS[][2];
-extern const size_t VERSIONS_EXPORT VERSIONS_N;
+extern VERSIONS_EXPORT const wchar_t *VERSIONS[][2];
+extern VERSIONS_EXPORT const size_t VERSIONS_N;
 uLong VERSIONS_EXPORT get_hash();
 
 #endif /* PP_VERSIONS_H */

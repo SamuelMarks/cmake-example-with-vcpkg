@@ -56,8 +56,9 @@ if (BUILD_TESTING)
   # Remove ^ and uncomment this next line once https://github.com/microsoft/vcpkg/pull/18895 merges
   # find_path(REXO_INCLUDE_DIRS "rexo.h")
   target_include_directories("${LIBRARY_NAME}Test" PRIVATE "${REXO_INCLUDE_DIRS}")
+  target_link_libraries("${LIBRARY_NAME}Test" PUBLIC "${_libs}")
 
-  add_test(NAME "${LIBRARY_NAME} test" COMMAND "${LIBRARY_NAME}Test")
+  add_test(NAME "${LIBRARY_NAME}Test" COMMAND "${LIBRARY_NAME}Test")
 endif (BUILD_TESTING)
 
 
