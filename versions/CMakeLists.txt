@@ -43,7 +43,7 @@ generate_export_header("${LIBRARY_NAME}" EXPORT_FILE_NAME "${_export_file}")
 
 
 # tests
-
+include(CTest)
 if (BUILD_TESTING)
   add_executable("${LIBRARY_NAME}Test" "${LIBRARY_NAME}_test.c")
 
@@ -55,10 +55,10 @@ if (BUILD_TESTING)
           SHA256=5a425ecb1ff5225781e084d195fd73430b33ceb8c086a6569a9d5fcc4d220ab6)
   # Remove ^ and uncomment this next line once https://github.com/microsoft/vcpkg/pull/18895 merges
   # find_path(REXO_INCLUDE_DIRS "rexo.h")
-  target_include_directories("${LIBRARY_NAME}Test" PRIVATE "${REXO_INCLUDE_DIRS}")
-  target_link_libraries("${LIBRARY_NAME}Test" PUBLIC "${_libs}")
+  target_include_directories("TEST${LIBRARY_NAME}Test" PRIVATE "${REXO_INCLUDE_DIRS}")
+  target_link_libraries("TEST${LIBRARY_NAME}Test" PUBLIC "${_libs}" "${LIBRARY_NAME}")
 
-  add_test(NAME "${LIBRARY_NAME}Test" COMMAND "${LIBRARY_NAME}Test")
+  add_test(NAME "TEST${LIBRARY_NAME}Test" COMMAND "TEST${LIBRARY_NAME}Test")
 endif (BUILD_TESTING)
 
 

@@ -89,7 +89,7 @@ if (BUILD_TESTING)
     # does the application run
     add_test(NAME Runs COMMAND "${PROJECT_NAME}")
 
-    # does the usage message work?
+    # is the output correct?
     add_test(NAME Output COMMAND "${PROJECT_NAME}")
     set_tests_properties(
             Output
