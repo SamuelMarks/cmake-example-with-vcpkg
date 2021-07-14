@@ -5,7 +5,7 @@ string(TOUPPER "${LIBRARY_NAME}" LIBRARY_UPPER_NAME)
 include(GenerateExportHeader)
 
 # add the library that runs
-add_library("${LIBRARY_NAME}" "versions")
+add_library("${LIBRARY_NAME}" "versions.c")
 
 set(_libs "")
 
