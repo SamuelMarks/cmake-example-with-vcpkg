@@ -49,10 +49,10 @@ if (BUILD_TESTING)
 
   set(REXO_INCLUDE_DIRS "${CMAKE_CURRENT_BINARY_DIR}/downloaded_headers")
   file(DOWNLOAD
-          https://raw.githubusercontent.com/christophercrouzet/rexo/91bd377/include/rexo.h
+          https://raw.githubusercontent.com/christophercrouzet/rexo/bebf252/include/rexo.h
           "${REXO_INCLUDE_DIRS}/rexo.h"
        EXPECTED_HASH
-          SHA256=5a425ecb1ff5225781e084d195fd73430b33ceb8c086a6569a9d5fcc4d220ab6)
+          SHA256=229e7a5eec440c18501c7cda345c8b8feaebb4c3a8c21db70ef5144d1b2f9ba9)
   # Remove ^ and uncomment this next line once https://github.com/microsoft/vcpkg/pull/18895 merges
   # find_path(REXO_INCLUDE_DIRS "rexo.h")
   target_include_directories("${LIBRARY_NAME}Test" PRIVATE "${REXO_INCLUDE_DIRS}")
